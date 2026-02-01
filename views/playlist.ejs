@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Video Playlist</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #f0f2f5, #c9d6ff);
+      padding: 40px 20px;
+      color: #2c3e50;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.8rem;
+      margin-bottom: 40px;
+      color: #34495e;
+    }
+
+    .playlist {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .video-card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      transition: transform 0.3s ease;
+    }
+
+    .video-card:hover {
+      transform: translateY(-6px);
+    }
+
+    .video-title {
+      font-size: 1.3rem;
+      margin-bottom: 15px;
+      color: #2d3436;
+      text-align: center;
+    }
+
+    iframe {
+      width: 100%;
+      height: 220px;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+
+    .thumbnail {
+      display: block;
+      margin: 0 auto;
+      width: 120px;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    .no-videos {
+      text-align: center;
+      font-size: 1.2rem;
+      color: #7f8c8d;
+      margin-top: 50px;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      iframe {
+        height: 180px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Video Playlist</h1>
+
+  <% if (videos && videos.length > 0) { %>
+    <div class="playlist">
+      <% videos.forEach(video => { %>
+        <div class="video-card">
+          <h3 class="video-title"><%= video.title %></h3>
+          <iframe src="https://www.youtube.com/embed/tcoThJlO56A" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+         
+        </div>
+      <% }); %>
+      <% videos.forEach(video => { %>
+        <div class="video-card">
+          <h3 class="video-title"><%= video.title %></h3>
+          <iframe src="https://www.youtube.com/embed/tcoThJlO56A" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+         
+        </div>
+      <% }); %>
+      <% videos.forEach(video => { %>
+        <div class="video-card">
+          <h3 class="video-title"><%= video.title %></h3>
+          <iframe src="https://www.youtube.com/embed/tcoThJlO56A" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          
+        </div>
+      <% }); %>
+      <% videos.forEach(video => { %>
+        <div class="video-card">
+          <h3 class="video-title"><%= video.title %></h3>
+          <iframe src="https://www.youtube.com/embed/tcoThJlO56A" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+         
+        </div>
+      <% }); %>
+      <% videos.forEach(video => { %>
+        <div class="video-card">
+          <h3 class="video-title"><%= video.title %></h3>
+          <iframe src="https://www.youtube.com/embed/tcoThJlO56A" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+         
+        </div>
+      <% }); %>
+      <% videos.forEach(video => { %>
+        <div class="video-card">
+          <h3 class="video-title"><%= video.title %></h3>
+          <iframe src="https://www.youtube.com/embed/tcoThJlO56A" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+     
+        </div>
+      <% }); %>
+    </div>
+  <% } else { %>
+    <p class="no-videos">No videos found.</p>
+  <% } %>
+</body>
+</html>

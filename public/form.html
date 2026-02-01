@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+</head>
+<style>
+    .reg {
+        background-color: hsl(170, 75%, 41%);
+        font-size: 20px;
+        padding: 10px;
+        color: white;
+        width: 150px;
+        border-radius: 10px;
+    }
+
+   
+    label {
+        font-family: Arial, sans-serif;
+        font-size: 20px; 
+        color: hsl(220, 40%, 30%);
+        margin-bottom: 8px;
+        margin-right: 10px;
+        display: block; 
+    }
+
+   
+    input[type="text"],
+    input[type="password"],
+    input[type="date"],
+    input[type="number"] {
+        margin-bottom: 20px; 
+        padding: 8px; 
+        font-size: 16px; 
+        border: 1px solid hsl(220, 20%, 70%);
+        border-radius: 5px;
+    }
+
+   
+    .radio-group {
+        display: flex;
+        align-items: center;
+        gap: 15px; 
+        margin-bottom: 20px; 
+    }
+
+    .radio-group input[type="radio"] {
+        margin-right: 5px; 
+    }
+
+    
+    form {
+        width: 400px; 
+        margin: 0 auto; 
+        background-color: hsl(0, 0%, 95%);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    }
+</style>
+
+
+<body>
+    <!-- <header class="header">
+   
+        <section class="flex">
+     
+           <a href="#" class="logo"><img src="WhatsApp Image 2024-08-01 at 14.25.29_18772675.jpg" alt="" height="90px"></a>
+     
+           <form action="search.html" method="post" class="search-form">
+              <input type="text" name="search_box" required placeholder="search courses..." maxlength="100">
+              <button type="submit" class="fas fa-search"></button>
+           </form>
+     
+           <div class="icons">
+              <div id="menu-btn" class="fas fa-bars"></div>
+              <div id="search-btn" class="fas fa-search"></div>
+              <div id="user-btn" class="fas fa-user"></div>
+          
+           </div>
+     
+           
+        </section>
+     
+     </header>   -->
+    <div class="side-bar">
+
+   
+        <div class="profile" >
+           <img src="pic-1.jpg" class="image" alt="">
+           <h3 class="name">Dhruv</h3>
+           <p class="role">student</p>
+           <a href="#" class="btn">view profile</a>
+        </div>
+        <nav class="navbar">
+            <a href="/index.html"><i class="fas fa-home"></i><span>Home</span></a>
+            <a href="/about.html"><i class="fas fa-question"></i><span>About</span></a>
+            <a href="/courses.html"><i class="fas fa-graduation-cap"></i><span>Courses</span></a>
+            <a href="/teacher.html"><i class="fas fa-chalkboard-user"></i><span>Teachers</span></a>
+            <a href="/contact.html"><i class="fas fa-headset"></i><span>Contact Us</span></a>
+            <a href="form.html"><i class="fa-solid fa-right-to-bracket"></i><span>Sign Up</span></a>
+         </nav>
+      
+     
+     </div>
+     <form id="userForm" action="/register1" method="post" onsubmit="return validatePassword()">
+        <center><br>
+            <h1>Sign Up Form</h1><br><br>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" placeholder="Enter your username" required><br><br>
+            
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required><br><br>
+            
+            <label for="dob">Date of Birth:</label>
+            <input type="date" id="dob" name="dob" required><br><br>
+            <label>Gender:</label>
+            <div class="radio-group">
+                <input type="radio" id="male" name="gender" value="male">
+                <label for="male">Male</label>
+            
+                <input type="radio" id="female" name="gender" value="female">
+                <label for="female">Female</label>
+            </div>
+            
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" placeholder="Enter your age" required><br><br>
+            
+            <button type="submit" class="reg">Register</button>
+        </center>
+    </form>
+
+    <script>
+        function validatePassword() {
+            const passwordInput = document.getElementById("password").value;
+            const fixedPassword = "dhruv"; 
+            
+            if (passwordInput !== fixedPassword) {
+                window.location.href = "/invalid"; 
+                return false; 
+            }
+            return true;
+        }
+    </script>
+
+</body>
+
+</html>
+
+<!-- action: Specifies where the form data should be sent.
+method: Specifies how the data should be sent. -->

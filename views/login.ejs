@@ -1,0 +1,118 @@
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #e0eafc, #cfdef3);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 20px;
+    font-size: 32px;
+    color: #2c3e50;
+}
+
+form {
+    background-color: #ffffff;
+    padding: 35px 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    max-width: 400px;
+    width: 100%;
+    text-align: left;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+}
+
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+button {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+p {
+    margin-top: 20px;
+    color: #555;
+    font-size: 14px;
+}
+
+a {
+    color: #4CAF50;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Optional: style the message (error or success) */
+p[style] {
+    margin-top: 10px;
+    font-weight: 600;
+}
+    
+
+    </style>
+  </head>
+  <link rel="stylesheet" href="/css/login.css">
+<body>
+    <h1>Login</h1>
+
+    <% if (typeof message !== 'undefined') { %>
+        <p 
+          <% if (typeof type !== 'undefined') { %>
+            style="color:<%= type === 'error' ? 'red' : 'green' %>;"
+          <% } %>
+        ><%= message %></p>
+    <% } %>
+
+    <form action="/auth/login" method="post">
+        <label>Email:</label>
+        <input type="email" name="email" required><br><br>
+    
+        <label>Password:</label>
+        <input type="password" name="password" required minlength="8"><br><br>
+    
+        <button type="submit">Login</button>
+    </form>
+    
+    
+    <p>Don't have an account? <a href="/register">Register</a></p>
+</body>
+</html>
