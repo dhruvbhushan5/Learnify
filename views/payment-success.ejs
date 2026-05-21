@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title><%= title %></title>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+   <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<header class="header">
+   <section class="flex">
+      <a href="/home" class="logo"><img src="/images/WhatsApp Image 2024-08-01 at 14.25.29_18772675.jpg" alt="Learnify Logo" height="90px"></a>
+      <div class="icons">
+         <div id="menu-btn" class="fas fa-bars"></div>
+         <div id="search-btn" class="fas fa-search"></div>
+         <div id="user-btn" class="fas fa-user"></div>
+      </div>
+   </section>
+</header>
+
+<div class="side-bar">
+   <div class="profile">
+      <img src="/images/pic-1.jpg" class="image" alt="">
+      <h3 class="name">Dhruv</h3>
+      <p class="role">student</p>
+      <a href="#" class="btn">view profile</a>
+   </div>
+
+   <nav class="navbar">
+      <a href="/home"><i class="fas fa-home"></i><span>Home</span></a>
+      <a href="/about"><i class="fas fa-question"></i><span>About</span></a>
+      <a href="/courses"><i class="fas fa-graduation-cap"></i><span>Courses</span></a>
+      <a href="/buy-course"><i class="fas fa-cart-shopping"></i><span>Buy a Course</span></a>
+      <a href="/teachers"><i class="fas fa-chalkboard-user"></i><span>Teachers</span></a>
+      <a href="/contactus"><i class="fas fa-headset"></i><span>Contact Us</span></a>
+   </nav>
+</div>
+
+<section class="payment-success">
+   <div class="success-box">
+      <i class="fas fa-circle-check"></i>
+      <h1>Payment Successful</h1>
+      <p>You have purchased <strong><%= course.title %></strong>.</p>
+      <p>Purchase ID: <span><%= purchase._id %></span></p>
+      <p>Amount Paid: <span>Rs. <%= purchase.amount %></span></p>
+      <div class="flex-btn">
+         <a href="/buy-course/<%= course.slug %>" class="inline-btn">watch course videos</a>
+         <a href="/buy-course" class="inline-option-btn">buy another course</a>
+      </div>
+   </div>
+</section>
+
+<footer class="footer">
+   &copy; copyright @ 2024 by <span>learnify</span> | all rights reserved!
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title><%= title %></title>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+   <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<header class="header">
+   <section class="flex">
+      <a href="/home" class="logo"><img src="/images/WhatsApp Image 2024-08-01 at 14.25.29_18772675.jpg" alt="Learnify Logo" height="90px"></a>
+      <form action="/buy-course" method="get" class="search-form">
+         <input type="text" name="search_box" placeholder="search paid courses..." maxlength="100">
+         <button type="submit" class="fas fa-search"></button>
+      </form>
+      <div class="icons">
+         <div id="menu-btn" class="fas fa-bars"></div>
+         <div id="search-btn" class="fas fa-search"></div>
+         <div id="user-btn" class="fas fa-user"></div>
+      </div>
+   </section>
+</header>
+
+<div class="side-bar">
+   <div class="profile">
+      <img src="/images/pic-1.jpg" class="image" alt="">
+      <h3 class="name">Dhruv</h3>
+      <p class="role">student</p>
+      <a href="#" class="btn">view profile</a>
+   </div>
+
+   <nav class="navbar">
+      <a href="/home"><i class="fas fa-home"></i><span>Home</span></a>
+      <a href="/about"><i class="fas fa-question"></i><span>About</span></a>
+      <a href="/courses"><i class="fas fa-graduation-cap"></i><span>Courses</span></a>
+      <a href="/buy-course"><i class="fas fa-cart-shopping"></i><span>Buy a Course</span></a>
+      <a href="/teachers"><i class="fas fa-chalkboard-user"></i><span>Teachers</span></a>
+      <a href="/contactus"><i class="fas fa-headset"></i><span>Contact Us</span></a>
+   </nav>
+</div>
+
+<section class="paid-course-detail">
+   <h1 class="heading"><%= course.title %></h1>
+
+   <div class="course-summary">
+      <div class="thumb">
+         <img src="<%= course.thumbnail %>" alt="<%= course.title %>">
+         <span><%= course.duration %></span>
+      </div>
+      <div class="content">
+         <h3><%= course.shortName %> Course</h3>
+         <p><%= course.description %></p>
+         <div class="course-meta">
+            <span><i class="fas fa-layer-group"></i> <%= course.level %></span>
+            <span><i class="fas fa-video"></i> <%= course.videos.length %> videos</span>
+            <strong>Rs. <%= course.price %></strong>
+         </div>
+      </div>
+   </div>
+
+   <div class="payment-layout">
+      <div class="video-list">
+         <h2>Available Videos</h2>
+         <% course.videos.forEach((video, index) => { %>
+            <div class="video-card">
+               <h3><span><%= index + 1 %>.</span> <%= video.title %></h3>
+               <iframe src="<%= video.videoUrl %>" title="<%= video.title %>" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+         <% }) %>
+      </div>
+
+      <form class="payment-form" action="/buy-course/<%= course.slug %>/payment" method="post">
+         <h2>Payment Details</h2>
+         <% if (error) { %>
+            <p class="payment-error"><%= error %></p>
+         <% } %>
+
+         <label for="studentName">Full Name</label>
+         <input id="studentName" type="text" name="studentName" placeholder="Enter your name" required>
+
+         <label for="email">Email</label>
+         <input id="email" type="email" name="email" placeholder="Enter your email" required>
+
+         <label for="phone">Phone</label>
+         <input id="phone" type="tel" name="phone" placeholder="Enter phone number" required>
+
+         <label for="paymentMethod">Payment Method</label>
+         <select id="paymentMethod" name="paymentMethod" required>
+            <option value="">Choose payment method</option>
+            <option value="upi">UPI</option>
+            <option value="card">Debit/Credit Card</option>
+            <option value="netbanking">Net Banking</option>
+         </select>
+
+         <div class="pay-total">
+            <span>Total</span>
+            <strong>Rs. <%= course.price %></strong>
+         </div>
+
+         <button type="submit" class="btn">pay & buy course</button>
+      </form>
+   </div>
+</section>
+
+<footer class="footer">
+   &copy; copyright @ 2024 by <span>learnify</span> | all rights reserved!
+</footer>
+
+</body>
+</html>

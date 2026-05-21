@@ -12,10 +12,11 @@ require("dotenv").config();
 
 const pageRoutes = require("./routes/pages");
 const authRoutes = require("./routes/auth");
+const buyCourseRoutes = require("./routes/buyCourse");
 const errorHandler = require("./middlewares/errorHandler");
 
 const app = express();
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
 require("./db"); //connects to mongodb
 
 // Set view engine to EJS
@@ -33,6 +34,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/", pageRoutes);        
 app.use("/auth", authRoutes);    
 app.use('/playlist', playlistRoutes); 
+app.use("/buy-course", buyCourseRoutes);
 
 
 
@@ -43,7 +45,7 @@ app.use(express.static(path.join(__dirname, "public")));
 // Error Handling Middleware
 app.use(errorHandler);
 
-app.listen(PORT, () => {
+app.listen(PORT, "0.0.0.0", () => {
     console.log(`Server running at http://localhost:${PORT}`);
 });
 

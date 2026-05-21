@@ -420,6 +420,215 @@ section{
    margin-top: 2rem;
 }
 
+.buy-courses .box-container{
+   display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+   gap:1.5rem;
+   justify-content: center;
+}
+
+.buy-courses .box-container .box,
+.course-summary,
+.payment-form,
+.video-card,
+.payment-success .success-box{
+   border-radius: 1rem;
+   background-color: #fff;
+   padding: 2rem;
+}
+
+.buy-courses .box-container .box .tutor{
+   display: flex;
+   align-items: center;
+   gap: 1.5rem;
+   margin-bottom: 2rem;
+}
+
+.buy-courses .box-container .box .tutor img{
+   height: 5rem;
+   width: 5rem;
+   border-radius: 50%;
+   object-fit: cover;
+}
+
+.buy-courses .box-container .box .tutor h3{
+   font-size: 1.8rem;
+   color: #2c3e50;
+}
+
+.buy-courses .box-container .box .tutor span,
+.buy-courses .box-container .box .description{
+   font-size: 1.5rem;
+   color: #888;
+}
+
+.buy-courses .box-container .box .description{
+   line-height: 1.6;
+   min-height: 7.2rem;
+}
+
+.buy-courses .box-container .box .thumb,
+.course-summary .thumb{
+   position: relative;
+}
+
+.buy-courses .box-container .box .thumb img,
+.course-summary .thumb img{
+   width: 100%;
+   height: 20rem;
+   object-fit: cover;
+   border-radius: .5rem;
+}
+
+.buy-courses .box-container .box .thumb span,
+.course-summary .thumb span{
+   position: absolute;
+   top: 1rem;
+   left: 1rem;
+   border-radius: .5rem;
+   padding: .5rem 1.5rem;
+   background-color: rgba(0,0,0,.3);
+   color: #fff;
+   font-size: 1.5rem;
+}
+
+.buy-courses .box-container .box .title{
+   font-size: 2rem;
+   color: #2c3e50;
+   padding: 1rem 0;
+}
+
+.course-meta,
+.pay-total{
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   flex-wrap: wrap;
+   gap: 1rem;
+   margin: 1.5rem 0;
+   font-size: 1.6rem;
+   color: #888;
+}
+
+.course-meta i{
+   color: hsl(170, 75%, 41%);
+}
+
+.course-meta strong,
+.pay-total strong{
+   color: hsl(170, 75%, 41%);
+   font-size: 2rem;
+}
+
+.course-summary{
+   display: grid;
+   grid-template-columns: minmax(28rem, 40rem) 1fr;
+   gap: 2rem;
+   align-items: center;
+   margin-bottom: 2rem;
+}
+
+.course-summary .content h3,
+.video-list h2,
+.payment-form h2{
+   font-size: 2.4rem;
+   color: #2c3e50;
+   margin-bottom: 1rem;
+}
+
+.course-summary .content p{
+   font-size: 1.7rem;
+   color: #888;
+   line-height: 1.8;
+}
+
+.payment-layout{
+   display: grid;
+   grid-template-columns: 1fr 36rem;
+   gap: 2rem;
+   align-items: start;
+}
+
+.video-list{
+   display: grid;
+   gap: 1.5rem;
+}
+
+.video-card h3{
+   font-size: 1.8rem;
+   color: #2c3e50;
+   margin-bottom: 1rem;
+}
+
+.video-card h3 span{
+   color: hsl(170, 75%, 41%);
+}
+
+.video-card iframe{
+   width: 100%;
+   height: 28rem;
+   border-radius: .8rem;
+}
+
+.payment-form{
+   position: sticky;
+   top: 12rem;
+}
+
+.payment-form label{
+   display: block;
+   font-size: 1.6rem;
+   color: #2c3e50;
+   margin-top: 1rem;
+}
+
+.payment-form input,
+.payment-form select{
+   width: 100%;
+   border-radius: .5rem;
+   background-color: #eee;
+   padding: 1.2rem;
+   font-size: 1.6rem;
+   color: #2c3e50;
+   margin-top: .6rem;
+}
+
+.payment-error{
+   border-radius: .5rem;
+   background-color: #ffe8e4;
+   color: #e74c3c;
+   font-size: 1.5rem;
+   padding: 1rem;
+   margin-bottom: 1rem;
+}
+
+.payment-success .success-box{
+   max-width: 62rem;
+   margin: 5rem auto;
+   text-align: center;
+}
+
+.payment-success .success-box i{
+   font-size: 6rem;
+   color: hsl(170, 75%, 41%);
+   margin-bottom: 1rem;
+}
+
+.payment-success .success-box h1{
+   font-size: 3rem;
+   color: #2c3e50;
+}
+
+.payment-success .success-box p{
+   font-size: 1.8rem;
+   color: #888;
+   line-height: 1.8;
+}
+
+.payment-success .success-box span{
+   color: hsl(170, 75%, 41%);
+}
+
 
 
 .playlist-videos .box-container .box:hover i{
@@ -832,6 +1041,15 @@ section{
 
    html{
       font-size: 55%;
+   }
+
+   .course-summary,
+   .payment-layout{
+      grid-template-columns: 1fr;
+   }
+
+   .payment-form{
+      position: static;
    }
 
 }
