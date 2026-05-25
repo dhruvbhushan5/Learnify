@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Course = require("../models/Course");
+const { courses: fallbackCourses } = require("../data/courses");
 
 // Render login page
 router.get("/", (req, res) => {
@@ -25,10 +26,10 @@ router.get("/register", (req, res) => {
 router.get("/home", async (req, res) => {
   try {
     const courses = await Course.find().limit(6);
-    res.render("index", { courses });
+    res.render("index", { courses: courses.length > 0 ? courses : fallbackCourses.slice(0, 6) });
   } catch (err) {
     console.error("Error loading home page courses:", err);
-    res.render("index", { courses: [] });
+    res.render("index", { courses: fallbackCourses.slice(0, 6) });
   }
 });
 
@@ -61,11 +62,19 @@ router.get('/courses', async (req, res) => {
       userName: req.user ? req.user.email.split('@')[0] : 'Guest',
       userRole: req.user ? req.user.role : 'guest',
       heading: 'Our Courses',
-      courses: courses
+      courses: courses.length > 0 ? courses : fallbackCourses
     });
   } catch (err) {
     console.error("Error loading courses:", err);
-    res.status(500).send("Error fetching courses");
+    res.render('courses', {
+      title: 'Courses',
+      logoImage: 'WhatsApp Image 2024-08-01 at 14.25.29_18772675.jpg',
+      userImage: 'pic-1.jpg',
+      userName: req.user ? req.user.email.split('@')[0] : 'Guest',
+      userRole: req.user ? req.user.role : 'guest',
+      heading: 'Our Courses',
+      courses: fallbackCourses
+    });
   }
 });
 

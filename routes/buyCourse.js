@@ -2,6 +2,7 @@ const express = require("express");
 const Course = require("../models/Course");
 const Purchase = require("../models/Purchase");
 const { requireAuth } = require("../middlewares/auth");
+const { courses: fallbackCourses, findCourseBySlug } = require("../data/courses");
 
 const router = express.Router();
 
@@ -13,17 +14,20 @@ router.get("/", async (req, res) => {
     const courses = await Course.find();
     res.render("buy-course", {
       title: "Buy a Course",
-      courses,
+      courses: courses.length > 0 ? courses : fallbackCourses,
     });
   } catch (err) {
     console.error("Error loading buy courses catalog:", err);
-    res.status(500).send("Error loading courses");
+    res.render("buy-course", {
+      title: "Buy a Course",
+      courses: fallbackCourses,
+    });
   }
 });
 
 router.get("/:slug", async (req, res) => {
   try {
-    const course = await Course.findOne({ slug: req.params.slug });
+    const course = await Course.findOne({ slug: req.params.slug }) || findCourseBySlug(req.params.slug);
 
     if (!course) {
       return res.status(404).send("Course not found");
@@ -53,8 +57,10 @@ router.get("/:slug", async (req, res) => {
 });
 
 router.post("/:slug/payment", async (req, res) => {
+  let course;
+
   try {
-    const course = await Course.findOne({ slug: req.params.slug });
+    course = await Course.findOne({ slug: req.params.slug }) || findCourseBySlug(req.params.slug);
 
     if (!course) {
       return res.status(404).send("Course not found");
