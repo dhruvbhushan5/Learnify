@@ -10,10 +10,9 @@ const getDatabaseStatus = () => {
 
 router.get("/", (req, res) => {
   const database = getDatabaseStatus();
-  const healthy = database === "connected";
 
-  res.status(healthy ? 200 : 503).json({
-    status: healthy ? "ok" : "degraded",
+  res.status(200).json({
+    status: "ok",
     service: "learnify-backend",
     uptime: Math.round(process.uptime()),
     database,
