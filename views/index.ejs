@@ -32,10 +32,21 @@
 
 <div class="side-bar">
    <div class="profile">
-      <img src="/images/pic-1.jpg" class="image" alt="">
-      <h3 class="name">Dhruv</h3>
-      <p class="role">Student</p>
-      <a href="#" class="btn">View Profile</a>
+      <% if (locals.user) { %>
+         <img src="/images/pic-1.jpg" class="image" alt="">
+         <h3 class="name"><%= user.email.split('@')[0] %></h3>
+         <p class="role"><%= user.role %></p>
+         <% if (user.role === 'tutor') { %>
+            <a href="/tutor/upload" class="option-btn" style="margin-bottom: .5rem; display: block; text-align: center; font-size: 1.4rem;">Upload Course</a>
+         <% } %>
+         <a href="/auth/logout" class="delete-btn" style="margin-top: .5rem; display: block; text-align: center; font-size: 1.4rem;">logout</a>
+      <% } else { %>
+         <p style="font-size: 1.6rem; margin-bottom: 1rem; color: var(--light-color);">Please login</p>
+         <div class="flex-btn">
+            <a href="/login" class="option-btn" style="font-size: 1.4rem;">login</a>
+            <a href="/register" class="option-btn" style="font-size: 1.4rem;">register</a>
+         </div>
+      <% } %>
    </div>
 
    <nav class="navbar">
@@ -46,10 +57,6 @@
       <a href="/teachers"><i class="fas fa-chalkboard-user"></i><span>Teachers</span></a>
       <a href="/contactus"><i class="fas fa-headset"></i><span>Contact Us</span></a>
    </nav>
-   
-
-   
-
 </div>
 
 <section class="home-grid">
@@ -105,118 +112,42 @@
     <h1 class="heading">Our Courses</h1>
  
     <div class="box-container">
- 
-       <div class="box">
-          <div class="tutor">
-             <img src="/images/pic-2.jpg" alt="">
-             <div class="info">
-                <h3>
-                   Tapalagna Chakraborty</h3>
-                <span>21-10-2022</span>
+       <% if (locals.courses && courses.length > 0) { %>
+          <% courses.forEach(course => { %>
+             <div class="box">
+                <div class="tutor">
+                   <img src="<%= course.tutorImage %>" alt="">
+                   <div class="info">
+                      <h3><%= course.tutorName %></h3>
+                      <span><%= course.level %> course</span>
+                   </div>
+                </div>
+                <div class="thumb"> 
+                   <img src="<%= course.thumbnail %>" alt="<%= course.title %>">
+                   <span><%= course.duration %></span>
+                </div>
+                <h3 class="title"><%= course.title %></h3>
+                <div style="font-size: 1.6rem; margin-bottom: 1.5rem; font-weight: bold; color: var(--black);">
+                   <% if (course.price > 0) { %>
+                      Price: Rs. <%= course.price %>
+                   <% } else { %>
+                      Free
+                   <% } %>
+                </div>
+                <% if (course.price > 0) { %>
+                   <a href="/buy-course/<%= course.slug %>" class="inline-btn">Buy Course</a>
+                <% } else { %>
+                   <a href="/playlist/<%= course.slug %>" class="inline-btn">View Playlist</a>
+                <% } %>
              </div>
-          </div>
-          <div class="thumb"> 
-             <img src="/images/thumb-1.png" alt="">
-             <span>10 videos</span>
-          </div>
-          <h3 class="title">complete HTML tutorial</h3>
-          <a href="/playlist" class="inline-btn">view playlist</a>
-       </div>
-
-
-  <div class="box">
-          <div class="tutor">
-             <img src="/images/pic-2.jpg" alt="">
-             <div class="info">
-                <h3>
-                   Tapalagna Chakraborty</h3>
-                <span>21-10-2022</span>
-             </div>
-          </div>
-          <div class="thumb"> 
-             <img src="/images/thumb-2.png" alt="">
-             <span>10 videos</span>
-          </div>
-          <h3 class="title">complete CSS tutorial</h3>
-          <a href="/playlist" class="inline-btn">view playlist</a>
-       </div>
-
- 
-       <div class="box">
-         <div class="tutor">
-            <img src="/images/pic-1.jpg" alt="">
-            <div class="info">
-               <h3>
-                  Jatin</h3>
-               <span>21-10-2023</span>
-            </div>
-         </div>
-         <div class="thumb"> 
-            <img src="/images/thumb-3.png" alt="">
-            <span>10 videos</span>
-         </div>
-         <h3 class="title">complete JavaScript tutorial</h3>
-         <a href="/playlist" class="inline-btn">view playlist</a>
-      </div>
-
- 
-      <div class="box">
-         <div class="tutor">
-            <img src="/images/pic-2.jpg" alt="">
-            <div class="info">
-               <h3>
-                  Tapalagna Chakraborty</h3>
-               <span>21-10-2022</span>
-            </div>
-         </div>
-         <div class="thumb"> 
-            <img src="/images/thumb-1.png" alt="">
-            <span>10 videos</span>
-         </div>
-         <h3 class="title">complete HTML tutorial</h3>
-         <a href="/playlist" class="inline-btn">view playlist</a>
-      </div>
-
-      <div class="box">
-         <div class="tutor">
-            <img src="/images/pic-2.jpg" alt="">
-            <div class="info">
-               <h3>
-                  Tapalagna Chakraborty</h3>
-               <span>21-10-2022</span>
-            </div>
-         </div>
-         <div class="thumb"> 
-            <img src="/images/thumb-1.png" alt="">
-            <span>10 videos</span>
-         </div>
-         <h3 class="title">complete HTML tutorial</h3>
-         <a href="/playlist" class="inline-btn">view playlist</a>
-      </div>
-
- 
-      <div class="box">
-         <div class="tutor">
-            <img src="/images/pic-2.jpg" alt="">
-            <div class="info">
-               <h3>
-                  Tapalagna Chakraborty</h3>
-               <span>21-10-2022</span>
-            </div>
-         </div>
-         <div class="thumb"> 
-            <img src="/images/thumb-1.png" alt="">
-            <span>10 videos</span>
-         </div>
-         <h3 class="title">complete HTML tutorial</h3>
-         <a href="/playlist" class="inline-btn">view playlist</a>
-      </div>
-
- 
+          <% }) %>
+       <% } else { %>
+          <p style="font-size: 1.6rem; color: var(--light-color); text-align: center; width: 100%;">No courses found.</p>
+       <% } %>
     </div>
  
     <div class="more-btn">
-       <a href="courses.html" class="inline-option-btn">view all courses</a>
+       <a href="/courses" class="inline-option-btn">view all courses</a>
     </div>
  
  </section>

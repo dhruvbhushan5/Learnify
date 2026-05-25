@@ -1,88 +1,72 @@
 const express = require("express");
 const router = express.Router();
-const path = require("path");
+const Course = require("../models/Course");
 
 // Render login page
 router.get("/", (req, res) => {
-    
-    res.render("login"); 
+  if (req.user) {
+    return res.redirect("/home");
+  }
+  res.render("login"); 
 });
-
 
 router.get("/login", (req, res) => {
-    res.redirect("/");
+  res.redirect("/");
 });
-
 
 // Render register page
 router.get("/register", (req, res) => {
-    res.render("register"); 
+  if (req.user) {
+    return res.redirect("/home");
+  }
+  res.render("register"); 
 });
 
-
-router.get("/home", (req, res) => {
-   
-    res.render("index"); 
+router.get("/home", async (req, res) => {
+  try {
+    const courses = await Course.find().limit(6);
+    res.render("index", { courses });
+  } catch (err) {
+    console.error("Error loading home page courses:", err);
+    res.render("index", { courses: [] });
+  }
 });
 
-//  New: Render about page
 router.get("/about", (req, res) => {
-    res.render("about"); 
+  res.render("about"); 
 });
 
-
-router.get("/playlist1", (req, res) => {
-    
-    res.render("playlist1");
-});
 router.get("/teachers", (req, res) => {
-    
-    res.render("teachers");
+  res.render("teachers");
 });
+
 router.get("/teacher_register", (req, res) => {
-    
-    res.render("teacher_register");
+  if (req.user && req.user.role === 'tutor') {
+    return res.redirect("/tutor/upload");
+  }
+  res.render("teacher_register");
 });
+
 router.get("/contactus", (req, res) => {
-    
-    res.render("contactus");
+  res.render("contactus");
 });
-router.get('/courses', (req, res) => {
-    const courses = [
-      {
-        tutorImage: 'pic-2.jpg',
-        tutorName: 'Tapalagna Chakraborty',
-        date: '21-10-2022',
-        thumbnail: 'thumb-1.png',
-        videosCount: 10,
-        title: 'complete HTML tutorial',
-        playlistLink: '/playlist'
-      },
-      {
-        tutorImage: 'pic-2.jpg',
-        tutorName: 'Jatin Arora',
-        date: '26-12-2022',
-        thumbnail: 'thumb-2.png',
-        videosCount: 5,
-        title: 'complete CSS tutorial',
-        playlistLink: '/playlist2'
-      },
-      // Add other courses here...
-    ];
-  
+
+router.get('/courses', async (req, res) => {
+  try {
+    const courses = await Course.find();
     res.render('courses', {
       title: 'Courses',
       logoImage: 'WhatsApp Image 2024-08-01 at 14.25.29_18772675.jpg',
       userImage: 'pic-1.jpg',
-      userName: 'Dhruv',
-      userRole: 'student',
+      userName: req.user ? req.user.email.split('@')[0] : 'Guest',
+      userRole: req.user ? req.user.role : 'guest',
       heading: 'Our Courses',
       courses: courses
     });
-  });
-  
-
-
-
+  } catch (err) {
+    console.error("Error loading courses:", err);
+    res.status(500).send("Error fetching courses");
+  }
+});
 
 module.exports = router;

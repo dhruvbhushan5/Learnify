@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title><%= title %></title>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+   <link rel="stylesheet" href="/css/style.css">
+   <style>
+      .form-box {
+         background-color: var(--white);
+         border-radius: .5rem;
+         padding: 2rem;
+         box-shadow: var(--box-shadow);
+         max-width: 800px;
+         margin: 0 auto;
+      }
+      .form-group {
+         margin-bottom: 1.5rem;
+      }
+      .form-group label {
+         font-size: 1.6rem;
+         color: var(--black);
+         display: block;
+         margin-bottom: .8rem;
+         font-weight: 600;
+      }
+      .form-group input, .form-group select, .form-group textarea {
+         width: 100%;
+         border-radius: .5rem;
+         padding: 1.2rem;
+         border: var(--border);
+         background-color: var(--light-bg);
+         font-size: 1.6rem;
+         color: var(--black);
+      }
+      .form-group textarea {
+         resize: vertical;
+         height: 10rem;
+      }
+      .video-entry {
+         border: var(--border);
+         padding: 1.5rem;
+         border-radius: .5rem;
+         margin-bottom: 1.5rem;
+         background-color: rgba(0,0,0,0.02);
+      }
+      .video-entry h4 {
+         font-size: 1.6rem;
+         color: var(--main-color);
+         margin-bottom: 1rem;
+      }
+      .btn-add {
+         background-color: var(--orange);
+         color: var(--white);
+         cursor: pointer;
+         padding: 1rem 1.5rem;
+         border-radius: .5rem;
+         font-size: 1.4rem;
+         display: inline-block;
+         margin-bottom: 2rem;
+         border: none;
+      }
+      .btn-add:hover {
+         background-color: var(--black);
+      }
+      .alert-error {
+         background-color: #f8d7da;
+         color: #721c24;
+         padding: 1.2rem;
+         border-radius: .5rem;
+         font-size: 1.6rem;
+         margin-bottom: 2rem;
+      }
+      .alert-success {
+         background-color: #d4edda;
+         color: #155724;
+         padding: 1.2rem;
+         border-radius: .5rem;
+         font-size: 1.6rem;
+         margin-bottom: 2rem;
+      }
+   </style>
+</head>
+<body>
+
+<header class="header">
+   <section class="flex">
+      <a href="/home" class="logo"><img src="/images/WhatsApp Image 2024-08-01 at 14.25.29_18772675.jpg" alt="Learnify Logo" height="90px"></a>
+      <div class="icons">
+         <div id="menu-btn" class="fas fa-bars"></div>
+         <div id="search-btn" class="fas fa-search"></div>
+         <div id="user-btn" class="fas fa-user"></div>
+      </div>
+   </section>
+</header>
+
+<div class="side-bar">
+   <div class="profile">
+      <% if (locals.user) { %>
+         <img src="/images/pic-1.jpg" class="image" alt="">
+         <h3 class="name"><%= user.email.split('@')[0] %></h3>
+         <p class="role"><%= user.role %></p>
+         <a href="#" class="btn">view profile</a>
+         <a href="/auth/logout" class="delete-btn" style="margin-top: 1rem; display: block; text-align: center;">logout</a>
+      <% } else { %>
+         <p style="font-size: 1.6rem; margin-bottom: 1rem;">Please login</p>
+         <a href="/login" class="option-btn">login</a>
+      <% } %>
+   </div>
+
+   <nav class="navbar">
+      <a href="/home"><i class="fas fa-home"></i><span>Home</span></a>
+      <a href="/about"><i class="fas fa-question"></i><span>About</span></a>
+      <a href="/courses"><i class="fas fa-graduation-cap"></i><span>Courses</span></a>
+      <a href="/buy-course"><i class="fas fa-cart-shopping"></i><span>Buy a Course</span></a>
+      <a href="/teachers"><i class="fas fa-chalkboard-user"></i><span>Teachers</span></a>
+      <a href="/contactus"><i class="fas fa-headset"></i><span>Contact Us</span></a>
+   </nav>
+</div>
+
+<section class="courses">
+   <h1 class="heading">Tutor Panel: Create New Course</h1>
+
+   <div class="form-box">
+      <% if (error) { %>
+         <div class="alert-error"><%= error %></div>
+      <% } %>
+      <% if (success) { %>
+         <div class="alert-success"><%= success %></div>
+      <% } %>
+
+      <form action="/tutor/upload-course" method="post">
+         <div class="form-group">
+            <label for="title">Course Title</label>
+            <input type="text" id="title" name="title" placeholder="e.g. Complete HTML5 Course" required>
+         </div>
+
+         <div class="form-group">
+            <label for="slug">URL Slug (unique name in lowercase, no spaces)</label>
+            <input type="text" id="slug" name="slug" placeholder="e.g. html5-mastery" required>
+         </div>
+
+         <div class="form-group">
+            <label for="shortName">Short/Display Name</label>
+            <input type="text" id="shortName" name="shortName" placeholder="e.g. HTML5" required>
+         </div>
+
+         <div class="form-group">
+            <label for="price">Price (in INR, set 0 for free)</label>
+            <input type="number" id="price" name="price" placeholder="e.g. 499" min="0" required>
+         </div>
+
+         <div class="form-group">
+            <label for="level">Difficulty Level</label>
+            <select id="level" name="level" required>
+               <option value="Beginner">Beginner</option>
+               <option value="Intermediate">Intermediate</option>
+               <option value="Advanced">Advanced</option>
+            </select>
+         </div>
+
+         <div class="form-group">
+            <label for="description">Course Description</label>
+            <textarea id="description" name="description" placeholder="Provide a summary of what students will learn..." required></textarea>
+         </div>
+
+         <h3 style="font-size: 2rem; color: var(--black); margin: 2rem 0 1rem 0;">Course Videos</h3>
+         <div id="videos-container">
+            <div class="video-entry">
+               <h4>Video #1</h4>
+               <div class="form-group">
+                  <input type="text" name="videoTitle" placeholder="Video Title (e.g. Introduction to HTML)" required>
+               </div>
+               <div class="form-group">
+                  <input type="url" name="videoUrl" placeholder="Video Embed URL (e.g. https://www.youtube.com/embed/tcoThJlO56A)" required>
+               </div>
+            </div>
+         </div>
+
+         <button type="button" class="btn-add" id="add-video-btn">+ Add Another Video</button>
+
+         <button type="submit" class="btn" style="width: 100%; display: block; margin-top: 1rem;">Publish Course</button>
+      </form>
+   </div>
+</section>
+
+<footer class="footer">
+   &copy; copyright @ 2024 by <span>learnify</span> | all rights reserved!
+</footer>
+
+<script>
+   let videoCount = 1;
+   const container = document.getElementById('videos-container');
+   const addBtn = document.getElementById('add-video-btn');
+
+   addBtn.addEventListener('click', () => {
+      videoCount++;
+      const entry = document.createElement('div');
+      entry.className = 'video-entry';
+      entry.innerHTML = `
+         <h4>Video #${videoCount}</h4>
+         <div class="form-group">
+            <input type="text" name="videoTitle" placeholder="Video Title" required>
+         </div>
+         <div class="form-group">
+            <input type="url" name="videoUrl" placeholder="Video Embed URL" required>
+         </div>
+      `;
+      container.appendChild(entry);
+   });
+</script>
+
+</body>
+</html>

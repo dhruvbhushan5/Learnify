@@ -23,10 +23,21 @@
 
 <div class="side-bar">
    <div class="profile">
-      <img src="/images/pic-1.jpg" class="image" alt="">
-      <h3 class="name">Dhruv</h3>
-      <p class="role">student</p>
-      <a href="#" class="btn">view profile</a>
+      <% if (locals.user) { %>
+         <img src="/images/pic-1.jpg" class="image" alt="">
+         <h3 class="name"><%= user.email.split('@')[0] %></h3>
+         <p class="role"><%= user.role %></p>
+         <% if (user.role === 'tutor') { %>
+            <a href="/tutor/upload" class="option-btn" style="margin-bottom: .5rem; display: block; text-align: center; font-size: 1.4rem;">Upload Course</a>
+         <% } %>
+         <a href="/auth/logout" class="delete-btn" style="margin-top: .5rem; display: block; text-align: center; font-size: 1.4rem;">logout</a>
+      <% } else { %>
+         <p style="font-size: 1.6rem; margin-bottom: 1rem; color: var(--light-color);">Please login</p>
+         <div class="flex-btn">
+            <a href="/login" class="option-btn" style="font-size: 1.4rem;">login</a>
+            <a href="/register" class="option-btn" style="font-size: 1.4rem;">register</a>
+         </div>
+      <% } %>
    </div>
 
    <nav class="navbar">
@@ -47,7 +58,7 @@
       <p>Purchase ID: <span><%= purchase._id %></span></p>
       <p>Amount Paid: <span>Rs. <%= purchase.amount %></span></p>
       <div class="flex-btn">
-         <a href="/buy-course/<%= course.slug %>" class="inline-btn">watch course videos</a>
+         <a href="/playlist/<%= course.slug %>" class="inline-btn">watch course videos</a>
          <a href="/buy-course" class="inline-option-btn">buy another course</a>
       </div>
    </div>
