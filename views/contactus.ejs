@@ -4,54 +4,56 @@
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>contact us</title>
-
+   <title>Contact Us</title>
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 
-    <header class="header">
-        <section class="flex">
-           <a href="#" class="logo"><img src="images/WhatsApp Image 2024-08-01 at 14.25.29_18772675.jpg" alt="" height="90px"></a>
-     
-           <form action="search.html" method="post" class="search-form">
-              <input type="text" name="search_box" required placeholder="search courses..." maxlength="100">
-              <button type="submit" class="fas fa-search"></button>
-           </form>
-     
-           <div class="icons">
-              <div id="menu-btn" class="fas fa-bars"></div>
-              <div id="search-btn" class="fas fa-search"></div>
-              <div id="user-btn" class="fas fa-user"></div>
-           </div>
-        </section>
-     </header>   
-     
-     <div class="side-bar">
-        <div class="profile">
-           <img src="images/pic-1.jpg" class="image" alt="">
-           <h3 class="name">Dhruv</h3>
-           <p class="role">student</p>
-           <a href="#" class="btn">view profile</a>
-        </div>
-     
-        <nav class="navbar">
-            <a href="/home"><i class="fas fa-home"></i><span>Home</span></a>
-            <a href="/about"><i class="fas fa-question"></i><span>About</span></a>
-            <a href="/courses"><i class="fas fa-graduation-cap"></i><span>Courses</span></a>
-            <a href="/buy-course"><i class="fas fa-cart-shopping"></i><span>Buy a Course</span></a>
-            <a href="/teachers"><i class="fas fa-chalkboard-user"></i><span>Teachers</span></a>
-            <a href="/contactus"><i class="fas fa-headset"></i><span>Contact Us</span></a>
-      </nav>
-         
-      
-     </div>
+<header class="header">
+   <section class="flex">
+      <a href="/home" class="logo"><img src="/images/WhatsApp Image 2024-08-01 at 14.25.29_18772675.jpg" alt="Learnify Logo" height="90px"></a>
+      <div class="icons">
+         <div id="menu-btn" class="fas fa-bars"></div>
+         <div id="search-btn" class="fas fa-search"></div>
+         <div id="user-btn" class="fas fa-user"></div>
+      </div>
+   </section>
+</header>   
+
+<div class="side-bar">
+   <div class="profile">
+      <% if (locals.user) { %>
+         <img src="/images/pic-1.jpg" class="image" alt="">
+         <h3 class="name"><%= user.email.split('@')[0] %></h3>
+         <p class="role"><%= user.role %></p>
+         <% if (user.role === 'tutor') { %>
+            <a href="/tutor/upload" class="option-btn" style="margin-bottom: .5rem; display: block; text-align: center; font-size: 1.4rem;">Upload Course</a>
+         <% } %>
+         <a href="/auth/logout" class="delete-btn" style="margin-top: .5rem; display: block; text-align: center; font-size: 1.4rem;">logout</a>
+      <% } else { %>
+         <p style="font-size: 1.6rem; margin-bottom: 1rem; color: var(--light-color);">Please login</p>
+         <div class="flex-btn">
+            <a href="/login" class="option-btn" style="font-size: 1.4rem;">login</a>
+            <a href="/register" class="option-btn" style="font-size: 1.4rem;">register</a>
+         </div>
+      <% } %>
+   </div>
+
+   <nav class="navbar">
+      <a href="/home"><i class="fas fa-home"></i><span>Home</span></a>
+      <a href="/about"><i class="fas fa-question"></i><span>About</span></a>
+      <a href="/courses"><i class="fas fa-graduation-cap"></i><span>Courses</span></a>
+      <a href="/buy-course"><i class="fas fa-cart-shopping"></i><span>Buy a Course</span></a>
+      <a href="/teachers"><i class="fas fa-chalkboard-user"></i><span>Teachers</span></a>
+      <a href="/contactus"><i class="fas fa-headset"></i><span>Contact Us</span></a>
+   </nav>
+</div>
 
 <section class="contact">
    <div class="row">
       <div class="image">
-         <img src="images/ea13b704-15f1-4b4a-9a03-4f0127641b44.png" alt="">
+         <img src="/images/ea13b704-15f1-4b4a-9a03-4f0127641b44.png" alt="">
       </div>
 
       <form action="" method="post">
@@ -76,7 +78,7 @@
          <i class="fas fa-envelope"></i>
          <h3>Email Address</h3>
          <a href="mailto:dhruv1564.be23@chitkara.edu.in">dhruv1564.be23@chitkara.edu.in</a>
-         <a href="mailto:anasbhai@gmail.com">anasbhai@gmail.come</a>
+         <a href="mailto:anasbhai@gmail.com">anasbhai@gmail.com</a>
       </div>
 
       <div class="box">
